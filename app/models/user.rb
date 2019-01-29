@@ -4,8 +4,11 @@ class User < ActiveRecord::Base
   has_many :plants, through: :gardens
 
   def slug
-    my_slug = name.gsub(" ", "-").downcase
+    name.gsub(" ", "-").downcase << "-#{id}"
   end
 
+  def self.find_by_slug(slug)
+    all.find {|u| u.slug == slug}
+  end
 
 end
