@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   has_many :gardens, through: :user_gardens
   has_many :plants, through: :gardens
 
+  has_secure_password # gives us access to the #authenticate method!
+
   def slug
     name.gsub(" ", "-").downcase << "-#{id}"
   end
