@@ -5,10 +5,22 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "lame string that will soon be hexed"
     set :views, "app/views"
     set :public_folder, "public"
-  end
+  endgit
 
   get '/' do
     "Hello world!"
+  end
+
+  helpers do
+
+    def logged_in?
+      !!current_user
+    end
+
+    def current_user
+      User.find_by(id: session[:user_id])
+    end
+
   end
 
 end
